@@ -1,8 +1,10 @@
+### Japanese Version of [leolabs/alfred-icloud-passwords](https://github.com/leolabs/alfred-icloud-passwords)
+
 # iCloud Passwords Workflow for Alfred
 
 This workflow allows you to quickly find and copy iCloud passwords and OTPs to your clipboard.
 
-**[Download](https://github.com/leolabs/alfred-icloud-passwords/releases/latest)**
+**[Download](https://github.com/tommy716/alfred-icloud-passwords/releases/latest)**
 
 ![demo](https://user-images.githubusercontent.com/541628/143510388-843a5fa1-118c-4367-aea8-75c2d9c417e3.gif)
 
