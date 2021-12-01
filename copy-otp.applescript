@@ -7,7 +7,7 @@ on run argv
 	set searchQuery to (item 1 of argv)
 	
 	tell application "System Events"
-		tell window "Passwords" of process "System Preferences"
+		tell window "パスワード" of process "システム環境設定"
 			# Wait for search field to be available
 			repeat until ((first text field whose subrole is "AXSearchField") exists)
 				delay 0.1
@@ -29,32 +29,18 @@ on run argv
 			# Select the first result
 			set selected of firstResult to true
 			
-			# Get selected domain and account names
+			# Copy the password
+			set passwordField to first button of scroll area 1 of group 1 whose description is "パスワード"
+			perform action "AXShowMenu" of passwordField
+			click menu item 1 of menu 1 of passwordField
+			
+			# Show a success notification
 			set domainName to value of static text 1 of UI element 1 of firstResult
 			set accountName to value of static text 2 of UI element 1 of firstResult
 			
-			set foundOtp to false
-			
-			# Look for a verification code
-			repeat with verificationCode in every button of scroll area 1 of group 1
-				set titleMatch to do shell script "sed 's/[^0-9]//g' <<<" & quoted form of (title of verificationCode as string)
-				
-				# Code should be at least 6 characters long
-				if (count titleMatch as string) � 6 then
-					perform action "AXShowMenu" of verificationCode
-					click menu item 1 of menu 1 of verificationCode
-					
-					display notification accountName with title "Copied verification code" subtitle domainName
-					set foundOtp to true
-				end if
-			end repeat
-			
-			if not foundOtp then
-				display notification "Account " & accountName & " has no OTP"
-			end if
+			display notification accountName with title "Password copied" subtitle domainName
 		end tell
 		
 		tell application "System Preferences" to quit
 	end tell
 end run
-
