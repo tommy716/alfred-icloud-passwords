@@ -7,7 +7,12 @@ on run argv
 	set searchQuery to (item 1 of argv)
 	
 	tell application "System Events"
-		tell window "ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰" of process "ã‚·ã‚¹ãƒ†ãƒ ç’°å¢ƒè¨­å®š"
+		tell application "System Preferences"
+			set the current pane to pane id "com.apple.Passwords"
+			activate
+		end tell
+		
+		tell window "ƒpƒXƒ[ƒh" of process "ƒVƒXƒeƒ€ŠÂ‹«İ’è"
 			# Wait for search field to be available
 			repeat until ((first text field whose subrole is "AXSearchField") exists)
 				delay 0.1
